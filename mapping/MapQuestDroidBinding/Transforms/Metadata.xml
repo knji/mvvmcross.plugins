@@ -1,0 +1,29 @@
+<metadata>
+  <!--
+  This sample removes the class: android.support.v4.content.AsyncTaskLoader.LoadTask:
+  <remove-node path="/api/package[@name='android.support.v4.content']/class[@name='AsyncTaskLoader.LoadTask']" />
+  
+  This sample removes the method: android.support.v4.content.CursorLoader.loadInBackground:
+  <remove-node path="/api/package[@name='android.support.v4.content']/class[@name='CursorLoader']/method[@name='loadInBackground']" />
+  -->
+
+
+  <attr path="/api/package[@name='com.mapquest.android']" name="managedName">MapQuest.Android</attr>
+  <attr path="/api/package[@name='com.mapquest.android.maps']" name="managedName">MapQuest.Android.Maps</attr>
+  <attr path="/api/package[@name='com.mapquest.android.intent']" name="managedName">MapQuest.Android.Intent</attr>
+  <attr path="/api/package[@name='com.mapquest.android.util']" name="managedName">MapQuest.Android.Util</attr>
+
+
+
+  <attr path="/api/package[@name='com.mapquest.android.maps']/class[@name='ServiceResponse']/field[@name='serviceResponse']" name="managedName">Response</attr>
+  <attr path="/api/package[@name='com.mapquest.android.maps']/class[@name='DefaultItemizedOverlay']/method[@name='createItem']/parameter[@name='p0']" name="name">id</attr>
+
+  
+  <attr path="/api/package[@name='com.mapquest.android.maps']/class[@name='DefaultItemizedOverlay']/method[@name='createItem']" name="return">java.lang.Object</attr>
+
+  <attr path="/api/package[@name='com.mapquest.android.maps']/class[@name='RouteResponse']/field[@name='collections']" name="managedName">routeCollections</attr>
+  <attr path="/api/package[@name='com.mapquest.android.maps']/class[@name='RouteResponse']/field[@name='route']" name="managedName">routeObject</attr>
+  <attr path="/api/package[@name='com.mapquest.android.maps']/class[@name='Route.Options']/field[@name='options']" name="managedName">routeOptions</attr>
+  <!--<attr path="/api/package[@name='com.mapquest.android.maps']/class[@name='ServiceResponse.Info']/constructor[@name='ServiceResponse.Info']" name="return">java.lang.Object</attr>-->
+
+</metadata>
