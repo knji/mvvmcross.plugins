@@ -74,14 +74,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FeatureLayerViewModel.cs" />
     <Compile Include="GeoFeature.cs" />
     <Compile Include="LineFeatureLayerViewModel.cs" />
-    <Compile Include="MapLayerViewModel.cs" />
     <Compile Include="MapQuestGeoFeatureConverter.cs" />
     <Compile Include="MapQuestGeometryConverter.cs" />
     <Compile Include="MapquestMapViewController.cs" />
     <Compile Include="MapQuestOverlayFactory.cs" />
     <Compile Include="MapQuestOverlayViewModel.cs" />
+    <Compile Include="MapquestStyleFactory.cs" />
     <Compile Include="MyLocationLayerViewModel.cs" />
     <Compile Include="MyLocationOverlay.cs" />
     <Compile Include="Plugin.cs" />

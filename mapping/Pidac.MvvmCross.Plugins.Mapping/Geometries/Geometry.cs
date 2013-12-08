@@ -4,7 +4,7 @@
     /// Geometry classes are modeled using OpenGIS specification:  http://dev.mysql.com/doc/refman/5.1/en/opengis-geometry-model.html 
     /// </summary>
 
-    public abstract class Geometry
+    public abstract class Geometry : IGeometry
     {
         public abstract GeometryType GeometryType { get; }
         public abstract int Dimension { get; }

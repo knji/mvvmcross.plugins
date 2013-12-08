@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Linq;
 using MapQuest.Android.Maps;
 
 namespace Pidac.MvvmCross.Plugins.Mapping.Droid
@@ -22,6 +23,11 @@ namespace Pidac.MvvmCross.Plugins.Mapping.Droid
         protected IEnumerable<GeoFeature> ConvertFeatures(IEnumerable<Feature> features)
         {
             return MapQuestGeoFeatureConverter.ConvertFeatures(features);
+        }
+
+        protected IEnumerable<MapQuest.Android.Maps.Feature> Convert(IEnumerable<Feature> features)
+        {
+            return features.Select(MapQuestGeoFeatureConverter.Convert);
         }
 
         protected override void OnGeoDataManagerCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)

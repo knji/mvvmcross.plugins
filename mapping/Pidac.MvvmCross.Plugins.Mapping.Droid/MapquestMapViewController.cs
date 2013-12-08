@@ -5,8 +5,6 @@ using Cirrious.CrossCore.Droid;
 using MapQuest.Android.Maps;
 using Pidac.MvvmCross.Plugins.Mapping.Geometries;
 using Pidac.MvvmCross.Plugins.Mapping.Styling;
-using BoundingBox = MapQuest.Android.Maps.BoundingBox;
-
 
 namespace Pidac.MvvmCross.Plugins.Mapping.Droid
 {

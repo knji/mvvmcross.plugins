@@ -4,6 +4,10 @@ using System.Linq;
 using MapQuest.Android.Maps;
 using Pidac.MvvmCross.Plugins.Mapping.Geometries;
 using BoundingBox = Pidac.MvvmCross.Plugins.Mapping.Geometries.BoundingBox;
+using Geometry = Pidac.MvvmCross.Plugins.Mapping.Geometries.Geometry;
+using GeometryType = Pidac.MvvmCross.Plugins.Mapping.Geometries.GeometryType;
+using LineString = Pidac.MvvmCross.Plugins.Mapping.Geometries.LineString;
+
 
 namespace Pidac.MvvmCross.Plugins.Mapping.Droid
 {
@@ -33,16 +37,18 @@ namespace Pidac.MvvmCross.Plugins.Mapping.Droid
             return new GeoPoint(point.Y, point.X);
         }
 
-        public static IList<GeoPoint> ConvertLine(LineString line)
+        public static MapQuest.Android.Maps.LineString ConvertLine(LineString line)
         {
-            return line.Vertices.Select( ConvertPoint).ToArray();
+            return new MapQuest.Android.Maps.LineString(line.Vertices.Select(ConvertPoint).ToArray());
         }
 
         public static IList<GeoPoint> ConvertPolygon(Polygon polygon)
         {
-            if (polygon.Rings.Count > 1)
-                throw new ArgumentException("polygon with multiple rings not currently supported. ");
-            return ConvertLine(polygon.Rings.First());
+            //if (polygon.Rings.Count > 1)
+            //    throw new ArgumentException("polygon with multiple rings not currently supported. ");
+            //return ConvertLine(polygon.Rings.First());
+
+            throw new NotImplementedException();
         }
     }
 }

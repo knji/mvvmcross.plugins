@@ -1,20 +1,32 @@
-﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
 
-namespace Pidac.MvvmCross.Plugins.Mapping.Geometries
+namespace MapQuest.Android.Maps
 {
+    public partial class GeoPoint : IGeometry
+    {
+        public GeometryType GeometryType {
+            get
+            {
+                return GeometryType.Point;
+            }
+        }
+
+        public BoundingBox GetBoundingBox()
+        {
+            return new BoundingBox(this, this);
+        }
+    }
+
     public abstract class Curve : Geometry
     {
         public override int Dimension { get { return 1; } }
-        public virtual List<Point> Vertices { get; set; }
-        public virtual Point EndPoint
+        public virtual List<GeoPoint> Vertices { get; set; }
+        public virtual GeoPoint EndPoint
         {
             get { return Vertices != null && Vertices.Count > 0 ? Vertices[Vertices.Count - 1] : null; }
         }
 
-        public virtual Point StartPoint
+        public virtual GeoPoint StartPoint
         {
             get { return Vertices != null && Vertices.Count > 0 ? Vertices[0] : null; }
         }
@@ -26,7 +38,7 @@ namespace Pidac.MvvmCross.Plugins.Mapping.Geometries
 
         public override BoundingBox GetBoundingBox()
         {
-            return BoundingBox.GetBounds(Vertices.ToArray());
+            return BoundingBox.FromGeometries(Vertices.ToArray());
         }
     }
 }

@@ -5,22 +5,18 @@ using MapQuest.Android.Maps;
 
 namespace Pidac.MvvmCross.Plugins.Mapping.Droid
 {
-    public class PointFeatureLayerViewModel : MapQuestOverlayViewModel<DefaultItemizedOverlay, IGeoDataManager>
+    public class FeatureLayerViewModel : MapQuestOverlayViewModel<VectorOverlay, IGeoDataManager>
     {
-       private readonly StringBuilder _stringBuilder = new StringBuilder();
-        public PointFeatureLayerViewModel(string name, string alias, DefaultItemizedOverlay layer, IGeoDataManager dataManager)
+        private readonly StringBuilder _stringBuilder = new StringBuilder();
+        public FeatureLayerViewModel(string name, string alias, VectorOverlay layer, IGeoDataManager dataManager)
             : base(name, alias, layer, dataManager)
         {
         }
 
         protected override void RefreshCore(IEnumerable<Feature> features)
         {
-            var geoFeatures = ConvertFeatures(features);
             Layer.Clear();
-            foreach (var feature in geoFeatures)
-            {
-                Layer.AddItem(CreateOverlayItem(feature));
-            }
+            Layer.FeatureSource.AddFeatures(Convert(features));
         }
 
         public OverlayItem CreateOverlayItem(GeoFeature feature)
@@ -47,7 +43,7 @@ namespace Pidac.MvvmCross.Plugins.Mapping.Droid
                 }
             }
 
-            return new OverlayItem((GeoPoint) feature.Geometry, field1, null);
+            return new OverlayItem((GeoPoint)feature.Geometry, field1, null);
         }
     }
 }

@@ -17,7 +17,8 @@ namespace Pidac.MvvmCross.Plugins.Mapping
 
         public BoundingBox GetBounds()
         {
-            if (Count == 0) return new BoundingBox(); // or throw?
+            if (Count == 0) return BoundingBox.Empty;
+            // or throw?
             return new BoundingBox(this.Select(f => f.Geometry).ToArray());
         }
     }

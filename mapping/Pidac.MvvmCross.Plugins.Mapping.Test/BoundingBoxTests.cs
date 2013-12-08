@@ -8,6 +8,8 @@ namespace Pidac.MvvmCross.Plugins.Mapping.Test
     [TestFixture]
     public class BoundingBoxTests
     {
+       
+
         [Test]
         public void TestUnion()
         {
@@ -32,7 +34,6 @@ namespace Pidac.MvvmCross.Plugins.Mapping.Test
             Console.WriteLine(bb.ToString());
             Assert.That(bb.Equals(new BoundingBox(-15, -25, 20, 10)));
         }
-
 
         [Test]
         public void TestBufferBy()

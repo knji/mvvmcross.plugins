@@ -40,14 +40,14 @@ namespace Pidac.MvvmCross.Plugins.Mapping.Geometries
 
         public BoundingBox(IList<Geometry> geometries)
         {
-            var bb = new BoundingBox(geometries[0].GetBoundingBox());
-            for (var i = 1; i < geometries.Count; i++)
-            {
-                bb.Union(geometries[i].GetBoundingBox());
-            }
-
+            var bb = geometries[0].GetBoundingBox();
             SouthWest = bb.SouthWest;
             NorthEast = bb.NorthEast;
+
+            for (var i = 1; i < geometries.Count; i++)
+            {
+                Union(geometries[i].GetBoundingBox());
+            }
         }
 
         public BoundingBox(double xmin, double ymin, double xmax, double ymax)
@@ -113,20 +113,17 @@ namespace Pidac.MvvmCross.Plugins.Mapping.Geometries
             return this;
         }
 
-        public static BoundingBox GetBounds(IList<Point> points)
+        public static BoundingBox GetBounds(IList<IGeometry> points)
         {
             if ((points == null) || (points.Count == 0))
             {
                 throw new ArgumentException("points");
             }
 
-            var bbox = new BoundingBox(points[0], points[0]);
+            var bbox = points[0].GetBoundingBox(); 
             for (int i = 1; i < points.Count; i++)
             {
-                bbox.SouthWest.X = Math.Min(points[i].X, bbox.SouthWest.X);
-                bbox.SouthWest.Y = Math.Min(points[i].Y, bbox.SouthWest.Y);
-                bbox.NorthEast.X = Math.Max(points[i].X, bbox.NorthEast.X);
-                bbox.NorthEast.Y = Math.Max(points[i].Y, bbox.NorthEast.Y);
+                bbox.Union(points[i].GetBoundingBox());
             }
             return bbox;
         }

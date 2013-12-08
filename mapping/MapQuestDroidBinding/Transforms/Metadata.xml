@@ -20,6 +20,8 @@
 
   
   <attr path="/api/package[@name='com.mapquest.android.maps']/class[@name='DefaultItemizedOverlay']/method[@name='createItem']" name="return">java.lang.Object</attr>
+  <attr path="/api/package[@name='com.mapquest.android.maps']/class[@name='Overlay']/method[@name='draw']" name="virtual">true</attr>
+  <attr path="/api/package[@name='com.mapquest.android.maps']/class[@name='Util']" name="visibility">public</attr>
 
   <attr path="/api/package[@name='com.mapquest.android.maps']/class[@name='RouteResponse']/field[@name='collections']" name="managedName">routeCollections</attr>
   <attr path="/api/package[@name='com.mapquest.android.maps']/class[@name='RouteResponse']/field[@name='route']" name="managedName">routeObject</attr>

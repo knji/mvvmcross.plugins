@@ -51,6 +51,7 @@
     <Compile Include="Geometries\Geometry.cs" />
     <Compile Include="CoordinateSystems\ICoordinateSystem.cs" />
     <Compile Include="Geometries\GeometryCollection.cs" />
+    <Compile Include="Geometries\IGeometry.cs" />
     <Compile Include="Geometries\LinearRing.cs" />
     <Compile Include="Geometries\LineString.cs" />
     <Compile Include="Geometries\PointCollection.cs" />

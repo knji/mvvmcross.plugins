@@ -3,7 +3,10 @@ using Android.Content.Res;
 using Android.Graphics;
 using Android.Graphics.Drawables;
 using MapQuest.Android.Maps;
+using Pidac.MvvmCross.Plugins.Mapping;
+using Pidac.MvvmCross.Plugins.Mapping.Droid;
 using Pidac.MvvmCross.Plugins.Mapping.Styling;
+using MyLocationOverlay = MapQuest.Android.Maps.MyLocationOverlay;
 
 namespace Pidac.MvvmCross.Plugins.Mapping.Droid
 {
@@ -14,17 +17,28 @@ namespace Pidac.MvvmCross.Plugins.Mapping.Droid
             AssetManager assetManager,
             AnnotationView annotationView = null)
         {
-            
             if (layerContext.StyleType == StyleType.Point)
             {
                 var overlay = CreatePointOverlay((PointStyleInfo)layerContext.StyleInfo, assetManager, annotationView);
                 return new PointFeatureLayerViewModel(layerContext.Name, layerContext.Alias, overlay, layerContext.GeoDataManager);
             }
 
+            //if (layerContext.StyleType == StyleType.Point)
+            //{
+            //    var style = MapquestStyleFactory.CreatePointStyle((PointStyleInfo)layerContext.StyleInfo, assetManager);
+            //    return CreateFeatureLayerViewModel(style, assetManager, annotationView, layerContext);
+            //}
+
+            //if (layerContext.StyleType == StyleType.Line)
+            //{
+            //    var lineOverlay = CreateLineOverlay((LineStyleInfo) layerContext.StyleInfo);
+            //    return new LineFeatureLayerViewModel(layerContext.Name, layerContext.Alias, lineOverlay, layerContext.GeoDataManager);
+            //}
+
             if (layerContext.StyleType == StyleType.Line)
             {
-                var lineOverlay = CreateLineOverlay((LineStyleInfo) layerContext.StyleInfo);
-                return new LineFeatureLayerViewModel(layerContext.Name, layerContext.Alias, lineOverlay, layerContext.GeoDataManager);
+                var lineStyle = MapquestStyleFactory.CreateLineStyle((LineStyleInfo)layerContext.StyleInfo);
+                return CreateFeatureLayerViewModel(lineStyle, assetManager, annotationView, layerContext);
             }
 
             if (layerContext.StyleType == StyleType.Polygon)
@@ -34,6 +48,21 @@ namespace Pidac.MvvmCross.Plugins.Mapping.Droid
             }
 
             throw new NotSupportedException(string.Format("layer content style {0} not supported.", layerContext.StyleType));
+        }
+
+        public FeatureLayerViewModel CreateFeatureLayerViewModel(Style style, AssetManager assetManager,
+                                                                 AnnotationView annotationView, FeatureLayerContext layerContext)
+        {
+            var overlay = CreateVectorOverlay(style, assetManager, annotationView);
+            return new FeatureLayerViewModel(layerContext.Name, layerContext.Alias, overlay, layerContext.GeoDataManager);
+        }
+
+        public VectorOverlay CreateVectorOverlay(Style style, AssetManager assetManager, AnnotationView annotationView = null)
+        {
+//            var drawable = CreateDrawable(styleInfo, assetManager);
+            var overlay = new VectorOverlay();
+            overlay.AddCustomStyle(style);
+            return overlay;
         }
 
         public DefaultItemizedOverlay CreatePointOverlay(PointStyleInfo styleInfo, AssetManager assetManager, AnnotationView annotationView = null)
@@ -60,29 +89,11 @@ namespace Pidac.MvvmCross.Plugins.Mapping.Droid
             return new Color(color.R, color.G, color.B, color.A);
         }
      
-        public Paint.Style GetLineStyle(LineType lineType )
-        {
-            if (lineType == LineType.Solid)
-                return Paint.Style.Fill;
-            if (lineType == LineType.Stroke)
-                return Paint.Style.Stroke;
-            return Paint.Style.Fill;
-        }
-
-        public Paint ConvertFromLineStyleInfo(ILineStyleInfo styleInfo)
-        {
-            var paint = new Paint(PaintFlags.AntiAlias);
-            paint.StrokeWidth = styleInfo.StrokeWidth;
-            paint.Alpha = 100;
-            paint.Color = CreateColor(styleInfo.StrokeColor);
-            paint.SetStyle(GetLineStyle(styleInfo.LineType));
-           
-            return paint;
-        }
+      
 
         public LineOverlay CreateLineOverlay( LineStyleInfo styleInfo)
         {
-            var paint = ConvertFromLineStyleInfo(styleInfo);
+            var paint = MapquestStyleFactory.CreatePaintFromStyleInfo(styleInfo);
             var lineOverlay = new LineOverlay(paint);
 
             // get from styleInfo
@@ -104,7 +115,7 @@ namespace Pidac.MvvmCross.Plugins.Mapping.Droid
             //paint.StrokeJoin = Paint.Join.Round;
             //paint.StrokeCap = Paint.Cap.Round;
 
-            var paint = ConvertFromLineStyleInfo(styleInfo);
+            var paint = MapquestStyleFactory.CreatePaintFromStyleInfo(styleInfo);
             var polygonOverlay = new PolygonOverlay(paint);
             return polygonOverlay;
         }

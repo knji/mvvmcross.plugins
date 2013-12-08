@@ -37,7 +37,31 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AreaStyle.cs" />
+    <Compile Include="BoundingBox.cs" />
+    <Compile Include="Core\MapView.cs" />
+    <Compile Include="Core\OverlayBase.cs" />
+    <Compile Include="Core\OverlayController.cs" />
+    <Compile Include="DrawContext.cs" />
+    <Compile Include="Feature.cs" />
+    <Compile Include="FeatureSource.cs" />
+    <Compile Include="GeoCollection.cs" />
+    <Compile Include="Geometry.cs" />
+    <Compile Include="GeometryType.cs" />
+    <Compile Include="GeoPoint.cs" />
+    <Compile Include="IGeometry.cs" />
+    <Compile Include="LineString.cs" />
+    <Compile Include="LineStyle.cs" />
+    <Compile Include="OverlayDrawEventArgs.cs" />
+    <Compile Include="PointStyle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SimplifierHandler.cs" />
+    <Compile Include="Style.cs" />
+    <Compile Include="TextStyle.cs" />
+    <Compile Include="Util.cs" />
+    <Compile Include="Core\VectorOverlay.cs" />
+    <Compile Include="ZoomLevel.cs" />
+    <Compile Include="ZoomLevelSet.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Jars\AboutJars.txt" />
